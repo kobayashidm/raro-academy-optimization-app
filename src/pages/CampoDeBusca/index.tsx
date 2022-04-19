@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Combobox } from '@headlessui/react'
 import { Pessoa } from '../../types/Pessoa'
 import { ComboboxItens } from '../../components/ComboboxItens';
+import { queryAllByAltText } from '@testing-library/react';
 
 export function CampoDeBusca() {
   const [pessoas, setPessoas] = useState<Pessoa[]>([])
@@ -18,7 +19,7 @@ export function CampoDeBusca() {
 
   useEffect(() => {
     buscaPessoas();
-  }, [query]);
+  }, [queryAllByAltText]);
 
   return (
     <div className="py-12 sm:px-6 lg:px-8">

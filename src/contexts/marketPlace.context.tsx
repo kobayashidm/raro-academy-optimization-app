@@ -22,7 +22,7 @@ const MarketPlaceContext = createContext<MarketPlaceContextProps>({
   adicionaCompra: (compra: Compra) => {},
 });
 
-export const MarketPlaceProvider: React.FC = ({ children }) => {
+export const MarketPlaceProvider: React.FC<any> = ({ children }) => {
   const [data, setData] = React.useState(new Date());
   const [produtos, setProdutos] = React.useState<Produto[]>([]);
   const [compras, setCompras] = React.useState<Compra[]>([]);

@@ -2,7 +2,7 @@ import faker from "@faker-js/faker";
 import { useEffect, useState } from "react";
 import { Button } from "../../components/Button";
 
-const Error: React.FC = ({ children }) => {
+const Error: React.FC<any> = ({ children }) => {
   console.log('===== renderiza erro', children);
   return (
     <h1 className="text-center text-red-500 text-base font-medium">

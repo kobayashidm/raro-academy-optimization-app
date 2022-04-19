@@ -30,7 +30,7 @@ const ChatContext = createContext<ChatContextProps>({
   adicionaMensagem: (texto: string, participante: ParticipanteChat) => {},
 });
 
-export const ChatProvider: React.FC = ({ children }) => {
+export const ChatProvider: React.FC<any> = ({ children }) => {
   const [ mensagens, setMensagens ] = useState<Mensagem[]>([]);
   const [ buscaMensagem, setBuscaMensagem ] = useState<string>('');
   const [ participantes, setParticipantes ] = useState<ParticipanteChat[]>([]);
