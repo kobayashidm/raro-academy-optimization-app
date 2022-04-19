@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { classNames } from "../../helpers/classNames";
+
 
 const colors: string[] = [
   'bg-gray-600',
@@ -30,6 +31,7 @@ const breakpoints: number[] = [
 
 export const ColorResponsive = () => {
   const [color, setColor] = useState('');
+  const debounceId = useRef(0);
 
   useEffect(() => {
     const alteraCor = () => {
@@ -40,10 +42,13 @@ export const ColorResponsive = () => {
     }
 
     alteraCor();
-    window.addEventListener('resize', alteraCor);
+    window.addEventListener("resize", () => {
+      clearTimeout(debounceId.current);
+      debounceId.current = window.setTimeout(alteraCor, 500);
+    });
     return () => {
-      window.removeEventListener('resize', alteraCor);
-    }
+      window.removeEventListener("resize", alteraCor);
+    };
   }, []);
 
   console.log('==== re-render')
@@ -55,7 +60,7 @@ export const ColorResponsive = () => {
       )
     }>
       <p className="text-5xl text-white md:text-7xl lg:text-9xl">
-        { color.replace('bg-', '').replace('-600', '') }
+      {color.replace('bg-', '').replace('-600', '')}
       </p>
     </div>
   );

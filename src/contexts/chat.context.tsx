@@ -3,6 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { geraPessoas } from "../helpers/gera-pessoa";
 import { Mensagem } from "../types/Mensagem";
 import { ParticipanteChat } from "../types/Participantes";
+import { AnyRecord } from "dns"
 
 const geraParticipante = (usuarioAtual = false): ParticipanteChat => ({
   ...geraPessoas(1)[0],
@@ -47,6 +48,7 @@ export const ChatProvider: React.FC<any> = ({ children }) => {
     // util para testes.
     Array.from(new Array(100)).forEach(() => {
       const id = faker.datatype.number({ min: 0, max: 1 });
+      const keyId = faker.datatype.uuid();
       const autor = participantes[id];
       const texto = faker.lorem.sentence();
       adicionaMensagem(texto, autor);
@@ -67,6 +69,7 @@ export const ChatProvider: React.FC<any> = ({ children }) => {
   const adicionaMensagem = (texto: string, autor: ParticipanteChat) => {
     const mensagem: Mensagem = {
       id: faker.datatype.uuid(),
+      keyId: faker.datatype.uuid(),
       texto,
       autor,
       data: new Date(),
